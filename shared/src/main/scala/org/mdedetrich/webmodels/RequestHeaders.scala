@@ -37,7 +37,7 @@ trait RequestHeaders {
   val `Via`: String                    = "Via"
   val `Warning`: String                = "Warning"
   val `X-Requested-With`: String       = "X-Requested-With"
-  val `X-Flow-Id`: String              = "X-Flow-Id"
+  val `X-Flow-ID`: String              = "X-Flow-ID"
   val `X-Forwarded-For`: String        = "X-Forwarded-For"
   val `X-Forwarded-Host`: String       = "X-Forwarded-Host"
   val `X-Forwarded-Proto`: String      = "X-Forwarded-Proto"
