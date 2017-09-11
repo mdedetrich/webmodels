@@ -21,7 +21,7 @@ lazy val webmodels = crossProject
   .settings(
     name := "webmodels",
     organization := "org.mdedetrich",
-    version := "0.1.2",
+    version := "0.1.3",
     homepage := Some(url("https://github.com/mdedetrich/webmodels")),
     scmInfo := Some(
       ScmInfo(url("https://github.com/mdedetrich/webmodels"), "git@github.com:mdedetrich/webmodels.git")),

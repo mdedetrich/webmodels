@@ -20,9 +20,12 @@ package org.mdedetrich.webmodels
   * @param instance A URI reference that identifies the specific
       occurrence of the problem.  It may or may not yield further
       information if dereferenced.
+  * @param extraFields Any extra fields placed into the problem object that
+  *   aren't part of the standard
   */
 case class Problem(`type`: Option[String],
                    title: String,
                    status: Option[Int],
                    detail: Option[String],
-                   instance: Option[String])
+                   instance: Option[String],
+                   extraFields: Map[String, String])
