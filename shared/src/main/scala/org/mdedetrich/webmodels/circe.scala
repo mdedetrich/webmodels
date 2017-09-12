@@ -2,6 +2,7 @@ package org.mdedetrich.webmodels
 
 import io.circe._
 import io.circe.syntax._
+import cats.syntax.either._
 
 object circe {
   implicit val correlationIdDecoder: Decoder[CorrelationId] = Decoder[String].map(CorrelationId)
