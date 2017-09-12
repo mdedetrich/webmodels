@@ -2,10 +2,12 @@ import PgpKeys.publishSigned
 
 name := "webmodels"
 
-val currentScalaVersion = "2.12.2"
+val currentScalaVersion = "2.12.3"
+val circeVersion = "0.8.0"
 
 scalaVersion in ThisBuild := currentScalaVersion
 crossScalaVersions in ThisBuild := Seq("2.11.11", currentScalaVersion)
+scalafmtVersion in ThisBuild := "1.1.0"
 
 lazy val root = project
   .in(file("."))
@@ -21,10 +23,9 @@ lazy val webmodels = crossProject
   .settings(
     name := "webmodels",
     organization := "org.mdedetrich",
-    version := "0.1.3",
+    version := "0.1.4",
     homepage := Some(url("https://github.com/mdedetrich/webmodels")),
-    scmInfo := Some(
-      ScmInfo(url("https://github.com/mdedetrich/webmodels"), "git@github.com:mdedetrich/webmodels.git")),
+    scmInfo := Some(ScmInfo(url("https://github.com/mdedetrich/webmodels"), "git@github.com:mdedetrich/webmodels.git")),
     developers := List(
       Developer("mdedetrich", "Matthew de Detrich", "mdedetrich@gmail.com", url("https://github.com/mdedetrich"))
     ),
@@ -32,10 +33,14 @@ lazy val webmodels = crossProject
     pomIncludeRepository := (_ => false)
   )
   .jvmSettings(
-    // Add JVM-specific settings here
+    libraryDependencies ++= Seq(
+      "io.circe" %% "circe-core" % "0.8.0"
+    )
   )
   .jsSettings(
-    // Add JS-specific settings here
+    libraryDependencies ++= Seq(
+      "io.circe" %%% "circe-core" % "0.8.0"
+    )
   )
 
 lazy val webmodelsJVM = webmodels.jvm
