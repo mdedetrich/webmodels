@@ -47,7 +47,10 @@ object circe {
       "instance" -> x.instance.asJson
     )
 
-    base deepMerge x.extraFields.asJson
+    if (x.extraFields.isEmpty)
+      base
+    else
+      x.extraFields.asJson deepMerge base
   }
 
   implicit val requestIdDecoder: Decoder[RequestId] = Decoder[String].map(RequestId)

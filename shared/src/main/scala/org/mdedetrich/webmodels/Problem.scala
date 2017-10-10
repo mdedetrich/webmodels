@@ -31,4 +31,4 @@ case class Problem(`type`: Option[String],
                    status: Option[Int],
                    detail: Option[String],
                    instance: Option[String],
-                   extraFields: JsonObject)
+                   extraFields: JsonObject = JsonObject.empty)
