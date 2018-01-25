@@ -28,7 +28,7 @@ import io.circe.JsonObject
   */
 case class Problem(`type`: Option[String],
                    title: String,
-                   status: Option[Int],
-                   detail: Option[String],
-                   instance: Option[String],
+                   status: Option[Int] = None,
+                   detail: Option[String] = None,
+                   instance: Option[String] = None,
                    extraFields: JsonObject = JsonObject.empty)

@@ -71,7 +71,7 @@ class ProblemSpec extends Specification {
 
   def decodeProblem1 = (name: String) => {
 
-    val asJson = problem1.asJson.pretty(Printer.noSpaces.copy(dropNullKeys = true))
+    val asJson = problem1.asJson.pretty(Printer.noSpaces.copy(dropNullValues = true))
 
     val problem1AsJsonWithoutNewline = problem1AsJson.trim
 
@@ -90,7 +90,7 @@ class ProblemSpec extends Specification {
 
   def decodeProblem2 = (name: String) => {
 
-    val asJson = problem2.asJson.pretty(Printer.noSpaces.copy(dropNullKeys = true))
+    val asJson = problem2.asJson.pretty(Printer.noSpaces.copy(dropNullValues = true))
 
     val problem1AsJsonWithoutNewline = problem2AsJson.trim
 
