@@ -48,6 +48,7 @@ trait RequestHeaders {
   val `X-Csrf-Token`: String           = "X-Csrf-Token"
   val `X-Request-ID`: String           = "X-Request-ID"
   val `X-Correlation-ID`: String       = "X-Correlation-ID"
+  val `X-Tenant-ID`: String            = "X-Tenant-ID"
 }
 
 object RequestHeaders extends RequestHeaders
