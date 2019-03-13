@@ -1,3 +1,3 @@
 package org.mdedetrich.webmodels
 
-case class FlowId(id: String) extends AnyVal
+final case class FlowId(value: String) extends AnyVal

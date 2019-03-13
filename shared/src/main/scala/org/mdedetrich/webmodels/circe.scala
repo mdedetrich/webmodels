@@ -6,13 +6,13 @@ import cats.syntax.either._
 
 object circe {
   implicit val correlationIdDecoder: Decoder[CorrelationId] = Decoder[String].map(CorrelationId)
-  implicit val correlationIdEncoder: Encoder[CorrelationId] = Encoder.instance[CorrelationId](_.id.asJson)
+  implicit val correlationIdEncoder: Encoder[CorrelationId] = Encoder.instance[CorrelationId](_.value.asJson)
 
   implicit val flowIdDecoder: Decoder[FlowId] = Decoder[String].map(FlowId)
-  implicit val flowIdEncoder: Encoder[FlowId] = Encoder.instance[FlowId](_.id.asJson)
+  implicit val flowIdEncoder: Encoder[FlowId] = Encoder.instance[FlowId](_.value.asJson)
 
   implicit val oAuth2TokenDecoder: Decoder[OAuth2Token] = Decoder[String].map(OAuth2Token)
-  implicit val oAuth2TokenEncoder: Encoder[OAuth2Token] = Encoder.instance[OAuth2Token](_.token.asJson)
+  implicit val oAuth2TokenEncoder: Encoder[OAuth2Token] = Encoder.instance[OAuth2Token](_.value.asJson)
 
   implicit val problemDecoder: Decoder[Problem] = Decoder.instance[Problem] { c =>
     for {
@@ -54,5 +54,5 @@ object circe {
   }
 
   implicit val requestIdDecoder: Decoder[RequestId] = Decoder[String].map(RequestId)
-  implicit val requestIdEncoder: Encoder[RequestId] = Encoder.instance[RequestId](_.id.asJson)
+  implicit val requestIdEncoder: Encoder[RequestId] = Encoder.instance[RequestId](_.value.asJson)
 }

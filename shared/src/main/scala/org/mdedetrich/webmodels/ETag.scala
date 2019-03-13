@@ -1,3 +1,3 @@
 package org.mdedetrich.webmodels
 
-case class ETag(tag: String, strong: Boolean)
+final case class ETag(value: String, strong: Boolean)

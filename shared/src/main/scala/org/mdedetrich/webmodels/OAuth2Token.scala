@@ -1,3 +1,3 @@
 package org.mdedetrich.webmodels
 
-case class OAuth2Token(token: String) extends AnyVal
+final case class OAuth2Token(value: String) extends AnyVal

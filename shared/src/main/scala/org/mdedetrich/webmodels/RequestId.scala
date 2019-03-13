@@ -1,3 +1,3 @@
 package org.mdedetrich.webmodels
 
-case class RequestId(id: String) extends AnyVal
+final case class RequestId(value: String) extends AnyVal
