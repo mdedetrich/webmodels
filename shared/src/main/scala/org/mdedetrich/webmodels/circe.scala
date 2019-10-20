@@ -22,8 +22,7 @@ object circe {
       problemStatus   <- c.downField("status").as[Option[Int]]
       problemDetail   <- c.downField("detail").as[Option[String]]
       problemInstance <- c.downField("instance").as[Option[String]]
-      asMap           = jsonObject.toMap
-      extraFields = asMap.filterKeys {
+      extraFields = jsonObject.filterKeys {
         case "type" | "title" | "status" | "detail" | "instance" => false
         case _                                                   => true
       }.asJsonObject

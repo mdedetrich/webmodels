@@ -4,9 +4,18 @@ import PgpKeys.publishSigned
 
 name := "webmodels"
 
-val currentScalaVersion = "2.12.8"
-val circeVersion        = "0.11.1"
-val specs2Version       = "4.3.4"
+val currentScalaVersion = "2.12.9"
+val scala213Version     = "2.13.1"
+val circeLatestVersion  = "0.12.2" // for Scala 2.12 and 2.13
+val circeOldVersion     = "0.11.1" // only for scala 2.11
+val specs2OldVersion    = "4.3.4"
+val specs2LatestVersion = "4.8.0"
+
+def circeVersion(scalaVer: String): String =
+  if (scalaVer.startsWith("2.11")) circeOldVersion else circeLatestVersion
+
+def specs2Version(scalaVer: String): String =
+  if (scalaVer.startsWith("2.11")) specs2OldVersion else specs2LatestVersion
 
 val flagsFor11 = Seq(
   "-Xlint:_",
@@ -23,8 +32,13 @@ val flagsFor12 = Seq(
   "-opt-inline-from:<sources>"
 )
 
+val flagsFor13 = Seq(
+  "-Xlint:_",
+  "-opt-inline-from:<sources>"
+)
+
 scalaVersion in ThisBuild := currentScalaVersion
-crossScalaVersions in ThisBuild := Seq("2.11.12", currentScalaVersion)
+crossScalaVersions in ThisBuild := Seq("2.11.12", currentScalaVersion, scala213Version)
 
 scalacOptions in Test in ThisBuild ++= Seq("-Yrangepos")
 
@@ -60,7 +74,9 @@ lazy val webmodels = crossProject(JSPlatform, JVMPlatform)
     pomIncludeRepository := (_ => false),
     scalacOptions ++= {
       CrossVersion.partialVersion(scalaVersion.value) match {
-        case Some((2, n)) if n >= 12 =>
+        case Some((2, n)) if n == 13 =>
+          flagsFor13
+        case Some((2, n)) if n == 12 =>
           flagsFor12
         case Some((2, n)) if n == 11 =>
           flagsFor11
@@ -69,16 +85,16 @@ lazy val webmodels = crossProject(JSPlatform, JVMPlatform)
   )
   .jvmSettings(
     libraryDependencies ++= Seq(
-      "io.circe"   %% "circe-core"   % circeVersion,
-      "org.specs2" %% "specs2-core"  % specs2Version % Test,
-      "io.circe"   %% "circe-parser" % circeVersion % Test
+      "io.circe"   %% "circe-core"   % circeVersion(scalaVersion.value),
+      "org.specs2" %% "specs2-core"  % specs2Version(scalaVersion.value) % Test,
+      "io.circe"   %% "circe-parser" % circeVersion(scalaVersion.value) % Test
     )
   )
   .jsSettings(
     libraryDependencies ++= Seq(
-      "io.circe"   %%% "circe-core"   % circeVersion,
-      "org.specs2" %%% "specs2-core"  % specs2Version % Test,
-      "io.circe"   %%% "circe-parser" % circeVersion % Test
+      "io.circe"   %%% "circe-core"   % circeVersion(scalaVersion.value),
+      "org.specs2" %%% "specs2-core"  % specs2Version(scalaVersion.value) % Test,
+      "io.circe"   %%% "circe-parser" % circeVersion(scalaVersion.value) % Test
     )
   )
 
