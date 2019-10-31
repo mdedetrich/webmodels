@@ -26,8 +26,8 @@ import io.circe.JsonObject
   * @param extraFields Any extra fields placed into the problem object that
   *   aren't part of the standard
   */
-case class Problem(`type`: Option[String],
-                   title: String,
+case class Problem(`type`: String,
+                   title: Option[String],
                    status: Option[Int] = None,
                    detail: Option[String] = None,
                    instance: Option[String] = None,

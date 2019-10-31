@@ -17,8 +17,8 @@ object circe {
   implicit val problemDecoder: Decoder[Problem] = Decoder.instance[Problem] { c =>
     for {
       jsonObject      <- c.as[JsonObject]
-      problemType     <- c.downField("type").as[Option[String]]
-      problemTitle    <- c.downField("title").as[String]
+      problemType     <- c.downField("type").as[String]
+      problemTitle    <- c.downField("title").as[Option[String]]
       problemStatus   <- c.downField("status").as[Option[Int]]
       problemDetail   <- c.downField("detail").as[Option[String]]
       problemInstance <- c.downField("instance").as[Option[String]]
