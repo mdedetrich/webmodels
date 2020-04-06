@@ -27,7 +27,7 @@ import io.circe.JsonObject
   *   aren't part of the standard
   */
 final case class Problem(`type`: String,
-                         title: Option[String],
+                         title: Option[String] = None,
                          status: Option[Int] = None,
                          detail: Option[String] = None,
                          instance: Option[String] = None,
