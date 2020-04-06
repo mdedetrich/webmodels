@@ -4,9 +4,9 @@ import PgpKeys.publishSigned
 
 name := "webmodels"
 
-val currentScalaVersion = "2.12.9"
+val currentScalaVersion = "2.12.11"
 val scala213Version     = "2.13.1"
-val circeLatestVersion  = "0.12.2" // for Scala 2.12 and 2.13
+val circeLatestVersion  = "0.13.0" // for Scala 2.12 and 2.13
 val circeOldVersion     = "0.11.1" // only for scala 2.11
 val specs2OldVersion    = "4.3.4"
 val specs2LatestVersion = "4.8.0"
