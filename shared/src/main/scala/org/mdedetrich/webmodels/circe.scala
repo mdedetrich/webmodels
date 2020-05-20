@@ -1,5 +1,7 @@
 package org.mdedetrich.webmodels
 
+import java.net.{URI, URISyntaxException}
+
 import io.circe._
 import io.circe.syntax._
 
