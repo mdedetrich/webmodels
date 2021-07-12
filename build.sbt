@@ -12,12 +12,14 @@ val specs2Version       = "4.12.3"
 val flagsFor12 = Seq(
   "-Xlint:_",
   "-Ywarn-infer-any",
-  "-opt-inline-from:<sources>"
+  "-opt-inline-from:<sources>",
+  "-opt:l:method"
 )
 
 val flagsFor13 = Seq(
   "-Xlint:_",
-  "-opt-inline-from:<sources>"
+  "-opt-inline-from:<sources>",
+  "-opt:l:method"
 )
 
 ThisBuild / scalaVersion       := currentScalaVersion
