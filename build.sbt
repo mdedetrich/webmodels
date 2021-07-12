@@ -24,6 +24,8 @@ ThisBuild / scalaVersion       := currentScalaVersion
 ThisBuild / crossScalaVersions := Seq(currentScalaVersion, scala213Version)
 ThisBuild / Test / scalacOptions += "-Yrangepos"
 
+ThisBuild / githubWorkflowPublishTargetBranches := Seq()
+
 lazy val root = project
   .in(file("."))
   .aggregate(webmodelsJS, webmodelsJVM)
@@ -80,3 +82,7 @@ lazy val webmodels = crossProject(JSPlatform, JVMPlatform)
 
 lazy val webmodelsJVM = webmodels.jvm
 lazy val webmodelsJS  = webmodels.js
+
+ThisBuild / githubWorkflowPublishTargetBranches := Seq()
+// This is set to false due to https://github.com/sbt/sbt/issues/6468
+ThisBuild / githubWorkflowUseSbtThinClient := false
