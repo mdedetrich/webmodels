@@ -4,10 +4,10 @@ import PgpKeys.publishSigned
 
 name := "webmodels"
 
-val currentScalaVersion = "2.12.12"
-val scala213Version     = "2.13.4"
-val circeVersion        = "0.13.0"
-val specs2Version       = "4.10.5"
+val currentScalaVersion = "2.12.14"
+val scala213Version     = "2.13.6"
+val circeVersion        = "0.14.1"
+val specs2Version       = "4.12.3"
 
 val flagsFor12 = Seq(
   "-Xlint:_",
