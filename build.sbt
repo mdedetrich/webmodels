@@ -20,27 +20,26 @@ val flagsFor13 = Seq(
   "-opt-inline-from:<sources>"
 )
 
-scalaVersion in ThisBuild := currentScalaVersion
+scalaVersion in ThisBuild       := currentScalaVersion
 crossScalaVersions in ThisBuild := Seq(currentScalaVersion, scala213Version)
-
 scalacOptions in Test in ThisBuild ++= Seq("-Yrangepos")
 
 lazy val root = project
   .in(file("."))
   .aggregate(webmodelsJS, webmodelsJVM)
   .settings(
-    publish := {},
-    publishLocal := {},
+    publish       := {},
+    publishLocal  := {},
     publishSigned := {}
   )
 
 lazy val webmodels = crossProject(JSPlatform, JVMPlatform)
   .in(file("."))
   .settings(
-    name := "webmodels",
+    name         := "webmodels",
     organization := "org.mdedetrich",
-    homepage := Some(url("https://github.com/mdedetrich/webmodels")),
-    scmInfo := Some(ScmInfo(url("https://github.com/mdedetrich/webmodels"), "git@github.com:mdedetrich/webmodels.git")),
+    homepage     := Some(url("https://github.com/mdedetrich/webmodels")),
+    scmInfo      := Some(ScmInfo(url("https://github.com/mdedetrich/webmodels"), "git@github.com:mdedetrich/webmodels.git")),
     developers := List(
       Developer("mdedetrich", "Matthew de Detrich", "mdedetrich@gmail.com", url("https://github.com/mdedetrich"))
     ),
@@ -54,7 +53,7 @@ lazy val webmodels = crossProject(JSPlatform, JVMPlatform)
         Some("releases" at nexus + "service/local/staging/deploy/maven2")
     },
     publishArtifact in Test := false,
-    pomIncludeRepository := (_ => false),
+    pomIncludeRepository    := (_ => false),
     scalacOptions ++= {
       CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((2, n)) if n == 13 =>
@@ -68,15 +67,15 @@ lazy val webmodels = crossProject(JSPlatform, JVMPlatform)
     libraryDependencies ++= Seq(
       "io.circe"   %% "circe-core"   % circeVersion,
       "org.specs2" %% "specs2-core"  % specs2Version % Test,
-      "io.circe"   %% "circe-parser" % circeVersion % Test
-    ),
+      "io.circe"   %% "circe-parser" % circeVersion  % Test
+    )
   )
   .jsSettings(
     libraryDependencies ++= Seq(
       "io.circe"   %%% "circe-core"   % circeVersion,
       "org.specs2" %%% "specs2-core"  % specs2Version % Test,
-      "io.circe"   %%% "circe-parser" % circeVersion % Test
-    ),
+      "io.circe"   %%% "circe-parser" % circeVersion  % Test
+    )
   )
 
 lazy val webmodelsJVM = webmodels.jvm

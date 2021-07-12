@@ -23,18 +23,17 @@ object circe {
       problemDetail   <- c.downField("detail").as[Option[String]]
       problemInstance <- c.downField("instance").as[Option[String]]
       extraFields = jsonObject.filterKeys {
-        case "type" | "title" | "status" | "detail" | "instance" => false
-        case _                                                   => true
-      }.asJsonObject
-    } yield
-      Problem(
-        problemType,
-        problemTitle,
-        problemStatus,
-        problemDetail,
-        problemInstance,
-        extraFields
-      )
+                      case "type" | "title" | "status" | "detail" | "instance" => false
+                      case _                                                   => true
+                    }.asJsonObject
+    } yield Problem(
+      problemType,
+      problemTitle,
+      problemStatus,
+      problemDetail,
+      problemInstance,
+      extraFields
+    )
   }
 
   implicit val problemEncoder: Encoder[Problem] = Encoder.instance[Problem] { x =>

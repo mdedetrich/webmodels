@@ -42,7 +42,8 @@ class ProblemSpec extends Specification {
     JsonObject.fromMap(
       Map(
         "code" -> 500.asJson
-      ))
+      )
+    )
   )
 
   val problem1AsJson = """{"type":"test","status":200}"""
