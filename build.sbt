@@ -20,9 +20,9 @@ val flagsFor13 = Seq(
   "-opt-inline-from:<sources>"
 )
 
-scalaVersion in ThisBuild       := currentScalaVersion
-crossScalaVersions in ThisBuild := Seq(currentScalaVersion, scala213Version)
-scalacOptions in Test in ThisBuild ++= Seq("-Yrangepos")
+ThisBuild / scalaVersion       := currentScalaVersion
+ThisBuild / crossScalaVersions := Seq(currentScalaVersion, scala213Version)
+ThisBuild / Test / scalacOptions += "-Yrangepos"
 
 lazy val root = project
   .in(file("."))
@@ -52,8 +52,8 @@ lazy val webmodels = crossProject(JSPlatform, JVMPlatform)
       else
         Some("releases" at nexus + "service/local/staging/deploy/maven2")
     },
-    publishArtifact in Test := false,
-    pomIncludeRepository    := (_ => false),
+    Test / publishArtifact := false,
+    pomIncludeRepository   := (_ => false),
     scalacOptions ++= {
       CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((2, n)) if n == 13 =>
