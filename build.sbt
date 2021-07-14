@@ -50,7 +50,7 @@ lazy val webmodels = crossProject(JSPlatform, JVMPlatform)
     developers := List(
       Developer("mdedetrich", "Matthew de Detrich", "mdedetrich@gmail.com", url("https://github.com/mdedetrich"))
     ),
-    licenses += ("BSD 3 Clause", url("https://opensource.org/licenses/BSD-3-Clause")),
+    licenses += ("BSD 2 Clause", url("https://opensource.org/licenses/BSD-2-Clause")),
     publishMavenStyle := true,
     publishTo := {
       val nexus = "https://oss.sonatype.org/"
