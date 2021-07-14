@@ -25,6 +25,7 @@ val flagsFor13 = Seq(
 ThisBuild / crossScalaVersions   := Seq(currentScalaVersion, scala213Version)
 ThisBuild / scalaVersion         := (ThisBuild / crossScalaVersions).value.last
 ThisBuild / mimaFailOnNoPrevious := false // Set this to true when we start caring about binary compatibility
+ThisBuild / versionScheme        := Some(VersionScheme.EarlySemVer)
 
 ThisBuild / Test / scalacOptions += "-Yrangepos"
 
