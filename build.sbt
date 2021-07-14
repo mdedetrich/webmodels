@@ -22,8 +22,9 @@ val flagsFor13 = Seq(
   "-opt:l:method"
 )
 
-ThisBuild / crossScalaVersions := Seq(currentScalaVersion, scala213Version)
-ThisBuild / scalaVersion       := (ThisBuild / crossScalaVersions).value.last
+ThisBuild / crossScalaVersions   := Seq(currentScalaVersion, scala213Version)
+ThisBuild / scalaVersion         := (ThisBuild / crossScalaVersions).value.last
+ThisBuild / mimaFailOnNoPrevious := false // Set this to true when we start caring about binary compatibility
 
 ThisBuild / Test / scalacOptions += "-Yrangepos"
 
@@ -86,6 +87,25 @@ lazy val webmodels = crossProject(JSPlatform, JVMPlatform)
 lazy val webmodelsJVM = webmodels.jvm
 lazy val webmodelsJS  = webmodels.js
 
-ThisBuild / githubWorkflowPublishTargetBranches := Seq()
-// This is set to false due to https://github.com/sbt/sbt/issues/6468
+ThisBuild / githubWorkflowBuild := Seq(
+  WorkflowStep.Sbt(List("mimaReportBinaryIssues"), name = Some("Report binary compatibility issues")),
+  WorkflowStep.Sbt(List("clean", "coverage", "test"), name = Some("Build project"))
+)
+
+ThisBuild / githubWorkflowBuildPostamble ++= Seq(
+  // See https://github.com/scoverage/sbt-coveralls#github-actions-integration
+  WorkflowStep.Sbt(
+    List("coverageReport", "coverageAggregate", "coveralls"),
+    name = Some("Upload coverage data to Coveralls"),
+    env = Map(
+      "COVERALLS_REPO_TOKEN" -> "${{ secrets.GITHUB_TOKEN }}",
+      "COVERALLS_FLAG_NAME"  -> "Scala ${{ matrix.scala }}"
+    )
+  )
+)
+
+// This is causing problems with env variables being passed in, see
+// https://github.com/sbt/sbt/issues/6468
 ThisBuild / githubWorkflowUseSbtThinClient := false
+
+ThisBuild / githubWorkflowPublishTargetBranches := Seq()
