@@ -31,6 +31,28 @@ ThisBuild / Test / scalacOptions += "-Yrangepos"
 
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 
+ThisBuild / organization := "org.mdedetrich"
+ThisBuild / homepage     := Some(url("https://github.com/mdedetrich/webmodels"))
+ThisBuild / scmInfo := Some(
+  ScmInfo(url("https://github.com/mdedetrich/webmodels"), "git@github.com:mdedetrich/webmodels.git")
+)
+ThisBuild / developers := List(
+  Developer("mdedetrich", "Matthew de Detrich", "mdedetrich@gmail.com", url("https://github.com/mdedetrich"))
+)
+ThisBuild / licenses += ("BSD 2 Clause", url("https://opensource.org/licenses/BSD-2-Clause"))
+ThisBuild / publishMavenStyle      := true
+ThisBuild / publishTo              := sonatypePublishTo.value
+ThisBuild / Test / publishArtifact := false
+ThisBuild / pomIncludeRepository   := (_ => false)
+ThisBuild / scalacOptions ++= {
+  CrossVersion.partialVersion(scalaVersion.value) match {
+    case Some((2, n)) if n == 13 =>
+      flagsFor13
+    case Some((2, n)) if n == 12 =>
+      flagsFor12
+  }
+}
+
 lazy val root = project
   .in(file("."))
   .aggregate(webmodelsJS, webmodelsJVM)
@@ -43,26 +65,7 @@ lazy val root = project
 lazy val webmodels = crossProject(JSPlatform, JVMPlatform)
   .in(file("."))
   .settings(
-    name         := "webmodels",
-    organization := "org.mdedetrich",
-    homepage     := Some(url("https://github.com/mdedetrich/webmodels")),
-    scmInfo      := Some(ScmInfo(url("https://github.com/mdedetrich/webmodels"), "git@github.com:mdedetrich/webmodels.git")),
-    developers := List(
-      Developer("mdedetrich", "Matthew de Detrich", "mdedetrich@gmail.com", url("https://github.com/mdedetrich"))
-    ),
-    licenses += ("BSD 2 Clause", url("https://opensource.org/licenses/BSD-2-Clause")),
-    publishMavenStyle      := true,
-    publishTo              := sonatypePublishTo.value,
-    Test / publishArtifact := false,
-    pomIncludeRepository   := (_ => false),
-    scalacOptions ++= {
-      CrossVersion.partialVersion(scalaVersion.value) match {
-        case Some((2, n)) if n == 13 =>
-          flagsFor13
-        case Some((2, n)) if n == 12 =>
-          flagsFor12
-      }
-    }
+    name := "webmodels"
   )
   .jvmSettings(
     libraryDependencies ++= Seq(
