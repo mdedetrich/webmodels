@@ -35,9 +35,9 @@ lazy val root = project
   .in(file("."))
   .aggregate(webmodelsJS, webmodelsJVM)
   .settings(
-    publish       := {},
-    publishLocal  := {},
-    publishSigned := {}
+    publish / skip       := true,
+    publishSigned / skip := true,
+    publishLocal / skip  := true
   )
 
 lazy val webmodels = crossProject(JSPlatform, JVMPlatform)
