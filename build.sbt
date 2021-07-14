@@ -51,14 +51,8 @@ lazy val webmodels = crossProject(JSPlatform, JVMPlatform)
       Developer("mdedetrich", "Matthew de Detrich", "mdedetrich@gmail.com", url("https://github.com/mdedetrich"))
     ),
     licenses += ("BSD 2 Clause", url("https://opensource.org/licenses/BSD-2-Clause")),
-    publishMavenStyle := true,
-    publishTo := {
-      val nexus = "https://oss.sonatype.org/"
-      if (isSnapshot.value)
-        Some("snapshots" at nexus + "content/repositories/snapshots")
-      else
-        Some("releases" at nexus + "service/local/staging/deploy/maven2")
-    },
+    publishMavenStyle      := true,
+    publishTo              := sonatypePublishTo.value,
     Test / publishArtifact := false,
     pomIncludeRepository   := (_ => false),
     scalacOptions ++= {
@@ -110,3 +104,21 @@ ThisBuild / githubWorkflowBuildPostamble ++= Seq(
 ThisBuild / githubWorkflowUseSbtThinClient := false
 
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
+
+import ReleaseTransformations._
+
+releaseCrossBuild := true
+releaseProcess := Seq[ReleaseStep](
+  checkSnapshotDependencies,
+  inquireVersions,
+  runClean,
+  runTest,
+  setReleaseVersion,
+  commitReleaseVersion,
+  tagRelease,
+  releaseStepCommandAndRemaining("+publishSigned"),
+  releaseStepCommand("sonatypeReleaseAll"),
+  setNextVersion,
+  commitNextVersion,
+  pushChanges
+)
