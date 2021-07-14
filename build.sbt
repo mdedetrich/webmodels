@@ -22,8 +22,9 @@ val flagsFor13 = Seq(
   "-opt:l:method"
 )
 
-ThisBuild / scalaVersion       := currentScalaVersion
 ThisBuild / crossScalaVersions := Seq(currentScalaVersion, scala213Version)
+ThisBuild / scalaVersion       := (ThisBuild / crossScalaVersions).value.last
+
 ThisBuild / Test / scalacOptions += "-Yrangepos"
 
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
