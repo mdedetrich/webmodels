@@ -17,7 +17,7 @@ class ProblemSpec extends Specification {
     """
 
   val problem1 = Problem(
-    "test",
+    Problem.DefaultType,
     None,
     Some(200),
     None,
@@ -25,7 +25,7 @@ class ProblemSpec extends Specification {
   )
 
   val problem1Again = Problem(
-    "test",
+    Problem.DefaultType,
     None,
     Some(200),
     None,
@@ -34,7 +34,7 @@ class ProblemSpec extends Specification {
   )
 
   val problem2 = Problem(
-    "test",
+    Problem.DefaultType,
     None,
     Some(200),
     None,
@@ -46,9 +46,9 @@ class ProblemSpec extends Specification {
     )
   )
 
-  val problem1AsJson = """{"type":"test","status":200}"""
+  val problem1AsJson = """{"type":"about:blank","status":200}"""
 
-  val problem2AsJson = """{"type":"test","status":200,"code":500}"""
+  val problem2AsJson = """{"type":"about:blank","status":200,"code":500}"""
 
   def encodeProblem1 = (name: String) => {
 
